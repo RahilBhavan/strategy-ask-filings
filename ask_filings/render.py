@@ -9,7 +9,7 @@ def amount(value, unit):
     rounded = ' (rounded for display; exact in --json)' if D(text.replace(',', '')) != v else ''
     if unit.startswith('USD'):
         rest = unit[3:].strip(' ,')
-        return f'${text}' + (f' ({rest})' if rest and rest != 'nominal' else '') + rounded
+        return f'${text} USD' + (f' {rest}' if rest and rest != 'nominal' else '') + rounded
     return f'{text} {unit}{rounded}'
 
 

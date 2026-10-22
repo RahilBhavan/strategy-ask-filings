@@ -2,7 +2,7 @@
 
 [![Offline verification](https://github.com/RahilBhavan/strategy-ask-filings/actions/workflows/ci.yml/badge.svg)](https://github.com/RahilBhavan/strategy-ask-filings/actions/workflows/ci.yml)
 
-A local natural-language CLI maps nine explicit question intents to Strategy filing fields. Each answer includes its value, units, dates, accession, source URL, original-byte hash and numbered normalized source sections. This is a deterministic grammar over structured facts; it calls no LLM or embedding model.
+A local CLI maps nine explicit question intents, asked in plain phrasings, to Strategy filing fields. Each answer includes its value, units, dates, accession, source URL, original-byte hash and numbered normalized source sections. This is a deterministic grammar over structured facts; it calls no LLM or embedding model.
 
 ## What it does
 
@@ -35,7 +35,34 @@ python -m ask_filings 'remaining capacity STRC on 2026-10-18'
 python -m ask_filings 'basic shares on 2026-07-24'
 ```
 
-Observed: **29 tests pass**, including a [56-case checked benchmark](docs/benchmark.md), on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
+Each answer prints one line first, then any note and the numbered source lines. Add `--json` for the full result with hashes:
+
+```text
+Answer: bitcoin holdings: 848,517 BTC, as of 2026-10-18 (period 2026-10-12 to 2026-10-18), filed 2026-10-19
+Evidence:
+  btc_held from https://www.sec.gov/Archives/edgar/data/1050446/000119312526424688/mstr-20261019.htm
+    accession 0001193125-26-424688, filed 2026-10-19, sha256 758fffb5bae0...
+    normalized lines 50-57, 77-78, 82
+      ...
+      55: 267 | 22.1 | 82,900 | 848,517 | 64.02 | 75,446
+```
+
+Example phrasings (all in the benchmark):
+
+| Ask | Answer |
+|---|---|
+| `latest bitcoin holdings` | 848,517 BTC as of 2026-10-18 |
+| `bitcoin purchased on 2026-03-12` | 22,337 BTC for the period 2026-03-09 to 2026-03-15 that contains the date, with a note saying so |
+| `bitcoin purchased week of 2026-03-09` | the same period total |
+| `bitcoin purchased between 2026-03-02 and 2026-03-22` | three weekly values and a 41,362 BTC total |
+| `issuance MSTR on 2026-10-18` | $22,000,000 USD net proceeds (MSTR Stock) |
+| `remaining capacity STRC on 2026-10-18` | $17,510,800,000 USD |
+| `How much bitcoin did Strategy hold for 2026-10-18?` | 848,517 BTC |
+| `bitcoin holdings on 2026-10-17` | unavailable: balances are filed only at period end; ask for 2026-10-18 |
+
+Templates: `python -m ask_filings --fields`. Dates may follow `on`, `for`, `at`, `as of` or `week of`; ranges use `between A and B` or `from A to B`. Ranges include only whole periods inside the range and total only flow fields (purchases, cost, issuance).
+
+Observed: **34 tests pass**, including a [75-case checked benchmark](docs/benchmark.md), on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
 programs, table/source tampering, missing cache and repeatable CLI output.
 See [verification](docs/verification.md) for the executed count and environment.
 For a custom checkout, use `--ledger` or `ASK_FILINGS_LEDGER`; see the
@@ -47,7 +74,10 @@ Expected non-answer commands (exit 2):
 python -m ask_filings 'bitcoin holdings on 2026-10-18' --as-of 2026-10-18
 python -m ask_filings 'sats per basic share on 2026-10-18'
 python -m ask_filings 'are daily dividends enacted'
+python -m ask_filings 'what is the mNAV'
 ```
+
+mNAV refuses because it needs market prices (MSTR share price and bitcoin price) that the filings do not state.
 
 ## Repository layout
 
