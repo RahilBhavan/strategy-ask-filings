@@ -1,5 +1,7 @@
 # Strategy ask filings: answer supported filing questions with exact evidence
 
+[![Offline verification](https://github.com/RahilBhavan/strategy-ask-filings/actions/workflows/ci.yml/badge.svg)](https://github.com/RahilBhavan/strategy-ask-filings/actions/workflows/ci.yml)
+
 A local natural-language CLI maps nine explicit question intents to Strategy filing fields. Each answer includes its value, units, dates, accession, source URL, original-byte hash and numbered normalized source sections. This is a deterministic grammar over structured facts; it calls no LLM or embedding model.
 
 ## What it does

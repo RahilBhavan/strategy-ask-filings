@@ -45,3 +45,7 @@ This verifies a nine-intent structured-fact interface. Human question coverage
 outside documented templates, PDF/OCR, unseen layouts, historical amendments,
 fresh SEC network hydration and comprehensive manual source interpretation
 are not proven. See [publication](publication.md) for final clone and CI evidence.
+
+Public-clone verification and GitHub CI passed; exact commit and run evidence
+are recorded in [publication](publication.md). CI tests Python 3.11.14 and
+3.14.0; local verification used Python 3.14.7.
