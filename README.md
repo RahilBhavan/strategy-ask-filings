@@ -59,6 +59,8 @@ python -m ask_filings 'are daily dividends enacted'
 
 ## Documentation
 
+- [Public design system](DESIGN.md): Rahil Design 3.3.0, shared tokens and visual review rules.
+
 - [Spec](docs/spec.md): accepted v1 and criteria.
 - [Method](docs/method.md): exact templates and evidence contract.
 - [Sources](docs/sources.md): primary source review and corpus limits.
