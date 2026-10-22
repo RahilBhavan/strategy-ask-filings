@@ -1,0 +1,7 @@
+{
+  "exit_code": 2,
+  "result": {
+    "reason": "source cache missing; run scripts/setup_ledger.py",
+    "status": "refused"
+  }
+}

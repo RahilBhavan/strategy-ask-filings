@@ -1,0 +1,7 @@
+{
+  "exit_code": 2,
+  "result": {
+    "reason": "date must be ISO YYYY-MM-DD",
+    "status": "refused"
+  }
+}

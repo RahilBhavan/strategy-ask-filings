@@ -1,0 +1,7 @@
+{
+  "exit_code": 2,
+  "result": {
+    "reason": "question must be text of at most 500 characters",
+    "status": "refused"
+  }
+}

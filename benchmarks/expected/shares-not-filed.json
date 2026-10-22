@@ -1,0 +1,9 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "basic shares",
+    "knowledge_cutoff": "2026-08-02",
+    "reason": "no matching filed record by cutoff; dates are exact observation dates",
+    "status": "unavailable"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2025-05-04",
+        "currency": "USD",
+        "evidence": [
+          {
+            "accession": "0000950170-25-063168",
+            "as_of": "2025-05-04",
+            "derivation": "parser extraction; source section includes context",
+            "field": "available_usd",
+            "filed": "2025-05-05",
+            "line_numbers": [
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              51
+            ],
+            "lines_sha256": "09171c02460be0fcc4e41c5fc1569eb68893d11ed2592173e4107d0d8719540a",
+            "local_bytes_sha256": "3f056f45b8987fd5899f25aa1c12f101a018667de8a9067a0d5eba69100e9808",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2025-04-28",
+            "sha256": "3f056f45b8987fd5899f25aa1c12f101a018667de8a9067a0d5eba69100e9808",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000095017025063168/mstr-20250331.htm",
+            "value": "21000000000"
+          }
+        ],
+        "filed": "2025-05-05",
+        "formula": null,
+        "period_start": "2025-04-28",
+        "program": "2025 Common ATM",
+        "unit": "stated currency",
+        "value": "21000000000"
+      },
+      {
+        "as_of": "2025-05-04",
+        "currency": "USD",
+        "evidence": [
+          {
+            "accession": "0000950170-25-063168",
+            "as_of": "2025-05-04",
+            "derivation": "parser extraction; source section includes context",
+            "field": "available_usd",
+            "filed": "2025-05-05",
+            "line_numbers": [
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              51
+            ],
+            "lines_sha256": "09171c02460be0fcc4e41c5fc1569eb68893d11ed2592173e4107d0d8719540a",
+            "local_bytes_sha256": "3f056f45b8987fd5899f25aa1c12f101a018667de8a9067a0d5eba69100e9808",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2025-04-28",
+            "sha256": "3f056f45b8987fd5899f25aa1c12f101a018667de8a9067a0d5eba69100e9808",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000095017025063168/mstr-20250331.htm",
+            "value": "0"
+          }
+        ],
+        "filed": "2025-05-05",
+        "formula": null,
+        "period_start": "2025-04-28",
+        "program": "2024 Common ATM",
+        "unit": "stated currency",
+        "value": "0"
+      }
+    ],
+    "field": "remaining capacity",
+    "knowledge_cutoff": "2026-10-21",
+    "status": "answered",
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

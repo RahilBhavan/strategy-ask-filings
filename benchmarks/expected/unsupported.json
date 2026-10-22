@@ -1,0 +1,7 @@
+{
+  "exit_code": 2,
+  "result": {
+    "reason": "unsupported or ambiguous question; use --fields for exact templates. No unrestricted QA, forecasts, legal conclusions or dividend enactment inference.",
+    "status": "refused"
+  }
+}

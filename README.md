@@ -34,7 +34,7 @@ python -m ask_filings 'remaining capacity STRC on 2026-10-18'
 python -m ask_filings 'basic shares on 2026-07-24'
 ```
 
-Observed: **23 tests pass** on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
+Observed: **28 tests pass**, including a [56-case checked benchmark](docs/benchmark.md), on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
 programs, table/source tampering, missing cache and repeatable CLI output.
 See [verification](docs/verification.md) for the executed count and environment.
 For a custom checkout, use `--ledger` or `ASK_FILINGS_LEDGER`; see the
@@ -62,6 +62,7 @@ python -m ask_filings 'are daily dividends enacted'
 - [Public design system](DESIGN.md): Rahil Design 3.3.0, shared tokens and visual review rules.
 
 - [Spec](docs/spec.md): accepted v1 and criteria.
+- [Benchmark](docs/benchmark.md): fixed expectations, category failures and five-minute replay.
 - [Method](docs/method.md): exact templates and evidence contract.
 - [Sources](docs/sources.md): primary source review and corpus limits.
 - [Verification](docs/verification.md): executed commands and limits.

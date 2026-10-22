@@ -1,6 +1,8 @@
 # Documentation
 
 - [Spec](spec.md): v1 scope and acceptance criteria.
+- [Benchmark](benchmark.md): checked questions, evidence oracles and replay.
+- [Improvement plan](improvement-plan.md): accepted slice and falsifiable done conditions.
 - [Method](method.md): grammar, mapping and refusals.
 - [Sources](sources.md): provenance and frozen source interpretation.
 - [Dependency](dependency.md): portable pinned ledger v1 contract.

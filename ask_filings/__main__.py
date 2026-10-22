@@ -16,7 +16,7 @@ def main():
     if a.fields:
         print(json.dumps(FIELDS, indent=2, sort_keys=True))
         return 0
-    if not a.question:
+    if a.question is None:
         p.error('provide a question or --fields')
     try:
         result = answer(a.question, a.ledger, a.as_of)

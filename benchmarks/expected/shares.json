@@ -1,0 +1,41 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2026-07-24",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001050446-26-000044",
+            "as_of": "2026-07-24",
+            "derivation": "class_a + class_b cover-page counts",
+            "field": "basic",
+            "filed": "2026-08-03",
+            "line_numbers": [
+              41
+            ],
+            "lines_sha256": "e06200e3e3d8dcc4b2ffa5e80bf316a80f945115e833cc1f963585cf85225ab3",
+            "local_bytes_sha256": "0a1f3e12246d199c66c0dc4b77a6d3f68a4c884af80fcc3af37977cf7cefc523",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": null,
+            "sha256": "0a1f3e12246d199c66c0dc4b77a6d3f68a4c884af80fcc3af37977cf7cefc523",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000044/mstr-20260630.htm",
+            "value": "384225751"
+          }
+        ],
+        "filed": "2026-08-03",
+        "formula": null,
+        "period_start": null,
+        "program": null,
+        "unit": "class A + class B shares",
+        "value": "384225751"
+      }
+    ],
+    "field": "basic shares",
+    "knowledge_cutoff": "2026-10-21",
+    "status": "answered",
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

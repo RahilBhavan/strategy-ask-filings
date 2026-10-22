@@ -1,0 +1,59 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2026-10-18",
+        "currency": "USD",
+        "evidence": [
+          {
+            "accession": "0001193125-26-424688",
+            "as_of": "2026-10-18",
+            "derivation": "parser extraction; source section includes context",
+            "field": "amount_usd",
+            "filed": "2026-10-19",
+            "line_numbers": [
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              62
+            ],
+            "lines_sha256": "3d4ce09a294ce01a207a480a9b1ca170f3b7ca383221f8c10e3c3c110f484e45",
+            "local_bytes_sha256": "758fffb5bae03a2b52568ef75168f7fe710e41b46f1092e96fd72425865c99f3",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-10-12",
+            "sha256": "758fffb5bae03a2b52568ef75168f7fe710e41b46f1092e96fd72425865c99f3",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526424688/mstr-20261019.htm",
+            "value": "0"
+          }
+        ],
+        "filed": "2026-10-19",
+        "formula": null,
+        "period_start": "2026-10-12",
+        "program": "STRC Stock",
+        "unit": "net proceeds in stated currency",
+        "value": "0"
+      }
+    ],
+    "field": "issuance",
+    "knowledge_cutoff": "2026-10-21",
+    "status": "answered",
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

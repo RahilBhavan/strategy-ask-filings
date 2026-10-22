@@ -1,0 +1,8 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "usd cash",
+    "reason": "field not disclosed in matching record",
+    "status": "unavailable"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2025-01-12",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001193125-25-005000",
+            "as_of": "2025-01-12",
+            "derivation": "parser extraction; source section includes context",
+            "field": "btc_held",
+            "filed": "2025-01-13",
+            "line_numbers": [
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              41,
+              55,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66
+            ],
+            "lines_sha256": "20847b06b79033535682382d12bd6cfa9ef70c7727300fc99678f450e60b2c5d",
+            "local_bytes_sha256": "3ebff0781b0d713dccd399536750188a83cfa7eee607d13fb926d0c1cbeeac35",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2025-01-06",
+            "sha256": "3ebff0781b0d713dccd399536750188a83cfa7eee607d13fb926d0c1cbeeac35",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312525005000/d884652d8k.htm",
+            "value": "450000"
+          },
+          {
+            "accession": "0001193125-25-005000",
+            "as_of": "2025-01-12",
+            "derivation": "parser extraction; source section includes context",
+            "field": "basic_shares",
+            "filed": "2025-01-13",
+            "line_numbers": [
+              38,
+              39,
+              40,
+              42,
+              45,
+              54,
+              56,
+              57,
+              59
+            ],
+            "lines_sha256": "fd32a49813f583913d6a744570de58f75ba533c81a7e6809fc234902afd6dbe0",
+            "local_bytes_sha256": "3ebff0781b0d713dccd399536750188a83cfa7eee607d13fb926d0c1cbeeac35",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2025-01-06",
+            "sha256": "3ebff0781b0d713dccd399536750188a83cfa7eee607d13fb926d0c1cbeeac35",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312525005000/d884652d8k.htm",
+            "value": "246489000"
+          }
+        ],
+        "filed": "2025-01-13",
+        "formula": "btc_held * 100000000 / basic_shares (same-date weekly filed denominator only)",
+        "period_start": "2025-01-06",
+        "program": null,
+        "unit": "satoshis / basic share",
+        "value": "182563.9278020520185484950647"
+      }
+    ],
+    "field": "sats per basic share",
+    "knowledge_cutoff": "2026-10-21",
+    "status": "answered",
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

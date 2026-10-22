@@ -1,0 +1,9 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "bitcoin holdings",
+    "knowledge_cutoff": "2026-10-18",
+    "reason": "no matching filed record by cutoff; dates are exact observation dates",
+    "status": "unavailable"
+  }
+}

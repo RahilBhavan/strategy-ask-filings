@@ -10,8 +10,11 @@ from .dependency import verify_table, verify_manifest
 
 
 def iso(value):
-    if not isinstance(value, str) or dt.date.fromisoformat(value).isoformat() != value:
-        raise ValueError('date must be ISO YYYY-MM-DD')
+    try:
+        if not isinstance(value, str) or dt.date.fromisoformat(value).isoformat() != value:
+            raise ValueError
+    except ValueError:
+        raise ValueError('date must be ISO YYYY-MM-DD') from None
     return value
 
 
@@ -20,7 +23,7 @@ def intent(query):
         raise ValueError('question must be text of at most 500 characters')
     for name, spec in FIELDS.items():
         pattern = spec['intent'] + r'(?: (?:on|for|at) (?P<date>\d{4}-\d{2}-\d{2}))?\??'
-        match = re.fullmatch(pattern, query.strip(), re.I)
+        match = re.fullmatch(pattern, ' '.join(query.split()), re.I)
         if match:
             parts = match.groupdict()
             if parts.get('date'):

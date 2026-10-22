@@ -2,7 +2,7 @@
 
 Purpose: describe the deterministic grammar and its refusal boundary.
 
-`ask_filings/fields.py` is the semantic field layer: name, source column, units, table and accepted intent expression. `--fields` exports it as JSON. Each template accepts an optional `on YYYY-MM-DD`, `for YYYY-MM-DD` or `at YYYY-MM-DD` suffix and an optional question mark. Matching is case-insensitive and anchored to the entire question. Multiple questions or arbitrary trailing instructions refuse.
+`ask_filings/fields.py` is the semantic field layer: name, source column, units, table and accepted intent expression. `--fields` exports it as JSON. Each template accepts an optional `on YYYY-MM-DD`, `for YYYY-MM-DD` or `at YYYY-MM-DD` suffix and an optional question mark. Whitespace runs (spaces, tabs and line breaks) normalize to one space before matching; the 500-character limit applies to the original input. Matching is case-insensitive and anchored to the entire question. Multiple questions or arbitrary trailing instructions refuse.
 
 Examples of accepted base templates:
 
@@ -25,3 +25,5 @@ The only ratios supported are sats/basic share with both BTC holdings and a same
 Purchase-cost questions in sale weeks refuse: the inherited USD field then represents sale proceeds. Queries verify table and source-manifest hashes against the frozen contract. Citations verify source bytes against the ledger manifest before returning evidence. A missing source cache refuses; asking never triggers network hydration.
 
 Unsupported questions return `refused`; supported questions with missing data return `unavailable`; competing filings for the same observation/program return `ambiguous`. All exit 2. Answers exit 0. This is a structured-fact query interface, not unrestricted semantic retrieval, an LLM, AI or financial advice. It does not answer accounting-policy, revenue, legal, forecast or dividend-enactment questions.
+
+Explicit empty questions return structured JSON refusal; omitting the question entirely remains an argparse usage error. Invalid question/cutoff dates use the stable reason `date must be ISO YYYY-MM-DD`.

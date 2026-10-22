@@ -1,0 +1,53 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2026-10-11",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001193125-26-419726",
+            "as_of": "2026-10-11",
+            "derivation": "parser extraction; source section includes context",
+            "field": "btc_held",
+            "filed": "2026-10-13",
+            "line_numbers": [
+              7,
+              8,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              52,
+              53,
+              56
+            ],
+            "lines_sha256": "a0e5bf95fed0fbbfd70add32463e70987461b0850aefd96162d30530189af4ee",
+            "local_bytes_sha256": "b3c3501059abe6f6fe470f0f055962849057da67034a3702b948d442aed8bda9",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-10-05",
+            "sha256": "b3c3501059abe6f6fe470f0f055962849057da67034a3702b948d442aed8bda9",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526419726/mstr-ex99_1.htm",
+            "value": "848250"
+          }
+        ],
+        "filed": "2026-10-13",
+        "formula": null,
+        "period_start": "2026-10-05",
+        "program": null,
+        "unit": "BTC",
+        "value": "848250"
+      }
+    ],
+    "field": "bitcoin holdings",
+    "knowledge_cutoff": "2026-10-18",
+    "status": "answered",
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

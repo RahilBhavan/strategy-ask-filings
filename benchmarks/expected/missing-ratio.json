@@ -1,0 +1,8 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "sats per basic share",
+    "reason": "no same-date filed basic-share denominator; no model substitution",
+    "status": "unavailable"
+  }
+}
