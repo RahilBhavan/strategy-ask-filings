@@ -9,7 +9,7 @@ import subprocess
 import sys
 import tempfile
 
-from .dependency import LOCK, PROJECT, default_ledger
+from .dependency import LOCK, PROJECT, default_ledger, scratch_dir
 
 
 SUITE = PROJECT / 'benchmarks/cases.json'
@@ -57,8 +57,8 @@ def evidence_root(root, scenario):
         return
     if scenario not in ('missing_source', 'altered_source'):
         raise ValueError('unknown benchmark scenario: ' + scenario)
-    scratch = Path.home() / 'scratch/strategy-ask-filings/benchmark'
-    scratch.mkdir(parents=True, exist_ok=True)
+    scratch = scratch_dir() / 'benchmark'
+    scratch.mkdir(exist_ok=True)
     try:
         with tempfile.TemporaryDirectory(dir=scratch) as tmp:
             target = Path(tmp)

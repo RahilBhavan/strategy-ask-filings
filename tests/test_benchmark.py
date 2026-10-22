@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 from ask_filings.benchmark import SUITE, differences, evaluate, run_suite
-from ask_filings.dependency import LOCK, PROJECT, default_ledger
+from ask_filings.dependency import LOCK, PROJECT, default_ledger, scratch_dir
 from ask_filings.engine import intent
 from ask_filings.fields import FIELDS
 
@@ -85,8 +85,7 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(differences([1], []), ['$.length'])
 
     def test_failed_category_case_and_cli_exit_are_visible(self):
-        scratch = Path.home() / 'scratch/strategy-ask-filings'
-        with tempfile.TemporaryDirectory(dir=scratch) as tmp:
+        with tempfile.TemporaryDirectory(dir=scratch_dir()) as tmp:
             root = Path(tmp)
             (root / 'expected').mkdir()
             case = next(c for c in self.cases if c['id'] == 'holdings')

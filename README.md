@@ -20,7 +20,8 @@ A local natural-language CLI maps nine explicit question intents to Strategy fil
 
 Python 3.11 or 3.14 and Git. No package dependencies, credentials or model API.
 First setup clones the reviewed [ledger](https://github.com/RahilBhavan/strategy-8k-ledger)
-commit into `~/scratch/strategy-ask-filings/`; it restores hashed source bytes
+commit into `.ask-filings/` inside this repository (git-ignored; set
+`ASK_FILINGS_HOME` to use another directory); it restores hashed source bytes
 from this repository. GitHub access is needed once. Tests and answers then run offline.
 
 ```bash
@@ -34,7 +35,7 @@ python -m ask_filings 'remaining capacity STRC on 2026-10-18'
 python -m ask_filings 'basic shares on 2026-07-24'
 ```
 
-Observed: **28 tests pass**, including a [56-case checked benchmark](docs/benchmark.md), on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
+Observed: **29 tests pass**, including a [56-case checked benchmark](docs/benchmark.md), on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
 programs, table/source tampering, missing cache and repeatable CLI output.
 See [verification](docs/verification.md) for the executed count and environment.
 For a custom checkout, use `--ledger` or `ASK_FILINGS_LEDGER`; see the

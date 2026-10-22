@@ -62,7 +62,7 @@ def main():
         p.error('checkout differs from pin; use a new empty directory')
     restore(root)
     print(f'Restored {LOCK["source_documents"]} verified source documents to {root}')
-    print('Answers and tests now run offline. Use --ledger or ASK_FILINGS_LEDGER for custom locations.')
+    print('Answers and tests now run offline. Use --ledger, ASK_FILINGS_LEDGER or ASK_FILINGS_HOME for custom locations.')
 
 
 if __name__ == '__main__':

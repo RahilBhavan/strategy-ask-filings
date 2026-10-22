@@ -10,9 +10,8 @@ from ask_filings.dependency import verify_table
 
 class IntegrityTests(unittest.TestCase):
     def scratch(self):
-        root = Path.home() / 'scratch/strategy-ask-filings'
-        root.mkdir(parents=True, exist_ok=True)
-        return tempfile.TemporaryDirectory(dir=root)
+        from ask_filings.dependency import scratch_dir
+        return tempfile.TemporaryDirectory(dir=scratch_dir())
 
     def test_altered_table_refused(self):
         from test_ask import LEDGER

@@ -6,7 +6,9 @@ Ask Filings imports `ledger.build.read(name)` and `ledger.evidence.cite(row,
 field)` from the exact commit in [ledger-lock.json](../fixtures/ledger-lock.json).
 It consumes `weekly.csv`, `instrument_weekly.csv` and `share_anchors.csv` with
 unchanged v1 column names. The CLI does not rebuild or hydrate from SEC.
-The default checkout is `~/scratch/strategy-ask-filings/ledger-<commit>`.
+The default checkout is `.ask-filings/ledger-<commit>` inside this repository
+(git-ignored). Set `ASK_FILINGS_HOME` to move the whole working area, including
+benchmark and test scratch copies.
 
 ```bash
 python scripts/setup_ledger.py
@@ -19,8 +21,8 @@ from a package index. Subsequent setup, answers and tests are offline. Setup
 verifies the pinned checkout commit and entire local source archive. Repeating
 it restores identical data and repairs interrupted or altered cache writes.
 A directory already at another commit is refused rather than reset. To use
-another location, pass `--ledger` to setup and CLI, and export
-`ASK_FILINGS_LEDGER` for the tests. Use a disk-backed scratch directory.
+another ledger location, pass `--ledger` to setup and CLI, or export
+`ASK_FILINGS_LEDGER` (it wins over `ASK_FILINGS_HOME`). Use a disk-backed directory.
 
 The bundle contains the complete three query tables and all their cited source
 documents, not synthetic fixtures. `tests/offline_guard/sitecustomize.py` blocks
