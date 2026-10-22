@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/RahilBhavan/strategy-8k-ledger.git",
+  "commit": "94c70044aaf14eea2ffb53deffd1a1f36bdec52e",
+  "archive_sha256": "6f1971a81d4b71a556fea858be234dac7375f042963f9fff3d0f404634f9e40c",
+  "source_documents": 101,
+  "snapshot_as_of": "2026-10-21",
+  "schema_version": 1,
+  "tables": {
+    "weekly.csv": "0387d872ad0dc08791e4202b1fb50ce1fceda0ae91ea90a6567d43cd84aeb1f8",
+    "instrument_weekly.csv": "66c17c2956cf8ce346786301ecd3ea79053936499da75d62a7bc559cd55f0a9c",
+    "share_anchors.csv": "19d6bfdfb26e17d5ba9d6d75df7f843455697619db8f5373fc222cab707d49bc"
+  },
+  "source_manifest_sha256": "f52658342abe9fd66632bbd0d6aca0521afd4bfb0db7cb7fad38be801c1cb18a"
+}

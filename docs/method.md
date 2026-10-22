@@ -22,6 +22,6 @@ Answers include the semantic field, units, period/as-of date, filing date, acces
 
 The only ratios supported are sats/basic share with both BTC holdings and a same-date denominator printed in the weekly filing. The five early-2025 denominators are rounded in thousands. Current-week queries refuse because no such denominator is disclosed. No cover-page roll-forward is substituted. Cover-page `basic` is class A + class B, with that formula labeled. It is not an assumed-diluted KPI.
 
-Purchase-cost questions in sale weeks refuse: the inherited USD field then represents sale proceeds. Citations verify source bytes against the ledger manifest before returning evidence.
+Purchase-cost questions in sale weeks refuse: the inherited USD field then represents sale proceeds. Queries verify table and source-manifest hashes against the frozen contract. Citations verify source bytes against the ledger manifest before returning evidence. A missing source cache refuses; asking never triggers network hydration.
 
 Unsupported questions return `refused`; supported questions with missing data return `unavailable`; competing filings for the same observation/program return `ambiguous`. All exit 2. Answers exit 0. This is a structured-fact query interface, not unrestricted semantic retrieval, an LLM, AI or financial advice. It does not answer accounting-policy, revenue, legal, forecast or dividend-enactment questions.

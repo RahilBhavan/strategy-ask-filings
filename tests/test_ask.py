@@ -6,7 +6,8 @@ import unittest
 from ask_filings.engine import answer, intent
 
 ROOT = Path(__file__).resolve().parents[1]
-LEDGER = ROOT.parent / 'strategy-8k-ledger'
+from ask_filings.dependency import default_ledger
+LEDGER = default_ledger()
 
 
 class AskTests(unittest.TestCase):
@@ -101,3 +102,22 @@ class AskTests(unittest.TestCase):
         result = self.ask('bitcoin purchase cost on 2026-08-09')
         self.assertEqual(result['status'], 'unavailable')
         self.assertIn('sale proceeds', result['reason'])
+
+    def test_denominator_citation_includes_column_dates(self):
+        for day, label in [('2025-01-12', '1/12/2025'), ('2025-01-20', '1/20/2025'),
+                           ('2025-01-26', '1/26/2025'), ('2025-02-09', '2/9/2025'),
+                           ('2025-02-23', '2/23/2025')]:
+            with self.subTest(day=day):
+                citation = self.ask('sats per basic share on ' + day)['facts'][0]['evidence'][1]
+                self.assertTrue(any(label in r['text'] for r in citation['lines']))
+
+    def test_duplicate_identity_is_ambiguous(self):
+        from ask_filings.engine import ledger_api
+        from unittest.mock import patch
+        build, _ = ledger_api(LEDGER)
+        row = next(r for r in build.read('weekly.csv') if r['period_end'] == '2026-10-18')
+        with patch.object(build, 'read', return_value=[row, dict(row)]):
+            self.assertEqual(self.ask('bitcoin holdings on 2026-10-18')['status'], 'ambiguous')
+
+    def test_disclosed_zero_is_not_missing(self):
+        self.assertEqual(self.ask('issuance STRC on 2026-10-18')['facts'][0]['value'], '0')

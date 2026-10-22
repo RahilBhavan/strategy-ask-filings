@@ -6,6 +6,7 @@ import re
 import sys
 from decimal import Decimal as D
 from .fields import FIELDS
+from .dependency import verify_table, verify_manifest
 
 
 def iso(value):
@@ -32,7 +33,7 @@ def intent(query):
 def ledger_api(root):
     root = Path(root).resolve()
     if not (root / 'ledger' / 'evidence.py').is_file():
-        raise ValueError('adjacent strategy-8k-ledger with evidence module is required')
+        raise ValueError('pinned strategy-8k-ledger with evidence module is required; run scripts/setup_ledger.py')
     existing = sys.modules.get('ledger')
     if existing and Path(existing.__file__).resolve().parent.parent != root:
         raise ValueError('a different ledger is already loaded; restart with one ledger path')
@@ -46,6 +47,7 @@ def answer(query, root, cutoff='2026-10-21'):
     iso(cutoff)
     name, spec, filters = intent(query)
     build, evidence = ledger_api(root)
+    verify_table(root, spec['table'] + '.csv')
     rows = build.read(spec['table'] + '.csv')
     rows = [r for r in rows if r['filed'] <= cutoff]
     date_field = 'as_of' if spec['table'] == 'share_anchors' else 'period_end'
@@ -64,6 +66,10 @@ def answer(query, root, cutoff='2026-10-21'):
         return {'status': 'ambiguous', 'reason': 'multiple filings for one observation; inspect ledger accessions'}
     facts = []
     for row in rows:
+        # Asking never hydrates or contacts SEC; setup restores the frozen cache.
+        if not Path(evidence.edgar.cache_path(row['doc_url'])).is_file():
+            raise ValueError('source cache missing; run scripts/setup_ledger.py')
+        verify_manifest(root)
         field = spec['field']
         if field == 'btc_purchase_usd' and D(row.get('btc_sold') or 0) > 0:
             return {'status': 'unavailable', 'field': name,

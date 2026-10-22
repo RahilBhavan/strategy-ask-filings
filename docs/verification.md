@@ -1,18 +1,32 @@
 # Verification receipt
 
-Purpose: record real answers, refusal behavior and replay. Executed 2026-10-21 America/Detroit, Python 3.14.7.
+Purpose: record actual behavior, refusal boundaries and reproducibility.
+
+Starting baseline: 14 tests passed at `897667f`, Python 3.14.7. Publication
+verification: **23 tests pass** on Python 3.14.7 against ledger
+`94c70044aaf14eea2ffb53deffd1a1f36bdec52e`. It adds frozen-data integrity, missing-cache refusal, source-byte
+tampering, restore replay, symlink refusal, duplicate-identity ambiguity,
+disclosed zero and the four denominator-date citation regressions.
 
 ```bash
-python -m unittest discover -s tests -v
+python scripts/setup_ledger.py
+python scripts/setup_ledger.py --offline
+PYTHONPATH=tests/offline_guard python -m unittest discover -s tests -v
+python -m compileall -q ask_filings scripts tests
 python -m ask_filings --fields
 python -m ask_filings 'bitcoin holdings on 2026-10-18'
 python -m ask_filings 'remaining capacity STRC on 2026-10-18'
 python -m ask_filings 'basic shares on 2026-07-24'
 ```
 
-14 tests pass. Values, source lines and hashes are checked against actual cached SEC 8-K and 10-Q content. Tests cover purchases, cost, USD Reserve/Cash, MSTR issuance, STRC capacity, cover-page class A+B shares, multiple ATM programs, exact dates and filing cutoffs. The July 24 share count remains unavailable before its August 3 filing; October 18 holdings remain unavailable on October 18. The latest selector respects the filing cutoff.
+The saved holdings and shares examples were regenerated and compared byte for
+byte. The latest STRC capacity command returns 17,510,800,000 USD. Separate CLI
+processes produce identical holdings evidence. Tests use actual frozen SEC
+bytes, not generated filing text, and block network connections including in
+subprocesses. Setup initially downloads only pinned code from GitHub; no SEC
+request, credential, package dependency or paid service is required.
 
-Expected non-answers were also executed, all exit 2:
+Expected non-answers executed with exit 2:
 
 ```bash
 python -m ask_filings 'bitcoin holdings on 2026-10-18' --as-of 2026-10-18
@@ -20,6 +34,14 @@ python -m ask_filings 'sats per basic share on 2026-10-18'
 python -m ask_filings 'are daily dividends enacted'
 ```
 
-Tests reject invalid dates, arbitrary/injected text, unsupported tickers, forecasts and compound questions. Sourced early-2025 sats/share is calculated from two cited fields; the current denominator refuses instead of using the inherited model. Repeat CLI processes return byte-identical saved holdings evidence. Sources are not interpreted as instructions.
+The July 24 cover-page share observation is unavailable before its August 3
+filing. The latest selector respects the filing cutoff. An absent same-date
+weekly denominator never uses a cover-page roll-forward. Sale proceeds never
+answer purchase-cost questions. Invalid dates, forecasts, arbitrary/injected
+text, unsupported tickers and compound questions refuse. Early-2025 ratios
+cite both inputs and retain rounded-in-thousands denominator context.
 
-This is a tested nine-intent structured-fact interface, not an unrestricted natural-language benchmark, LLM system or full quarterly financial-statement extraction. Human question coverage outside the documented templates, OCR/PDFs, unseen layouts, historical amendments and fresh SEC network hydration are not proven here. The upstream ledger documents parser/cache checks and the local corpus.
+This verifies a nine-intent structured-fact interface. Human question coverage
+outside documented templates, PDF/OCR, unseen layouts, historical amendments,
+fresh SEC network hydration and comprehensive manual source interpretation
+are not proven. See [publication](publication.md) for final clone and CI evidence.
