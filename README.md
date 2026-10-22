@@ -82,6 +82,6 @@ SEC EDGAR CIK 1050446, via the commit-pinned ledger. Primary [October 19 8-K](ht
 
 ## License
 
-No license file yet. No license has been selected; third-party filings retain their own terms.
+[MIT](LICENSE). The license covers this project's code only. Third-party filings retain their own terms.
 
 Part of [Rahil Bhavan's projects](https://github.com/RahilBhavan).

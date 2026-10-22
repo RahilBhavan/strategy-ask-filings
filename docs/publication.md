@@ -71,3 +71,7 @@ LLM, live-feed, amendment-resolution, financial-accuracy certification or
 security-certification claim. The October 28 proposal remains pending at the
 snapshot. No license file yet. Verification scratch clones are disposable;
 run setup to restore the default dependency after cleanup.
+
+## Update 2026-10-22: license
+
+The MIT license was added in `LICENSE`. It covers this project's code only. Earlier statements in this record that no license file existed describe the state at publication.
