@@ -1,0 +1,7 @@
+{
+  "exit_code": 2,
+  "result": {
+    "reason": "mNAV is unsupported: it divides market value (MSTR share price, or enterprise value) by bitcoin NAV (bitcoin price x holdings). Market prices are not stated in these SEC filings, and this tool answers only filed values. Holdings are available: try \"bitcoin holdings\".",
+    "status": "refused"
+  }
+}

@@ -22,7 +22,7 @@ class IntegrityTests(unittest.TestCase):
             shutil.copyfile(LEDGER / 'data/weekly.csv', table)
             table.write_bytes(table.read_bytes().replace(b'848517', b'123'))
             shutil.copytree(LEDGER / 'ledger', root / 'ledger', ignore=shutil.ignore_patterns('__pycache__'))
-            run = subprocess.run([sys.executable, '-m', 'ask_filings', 'bitcoin holdings',
+            run = subprocess.run([sys.executable, '-m', 'ask_filings', '--json', 'bitcoin holdings',
                                   '--ledger', str(root)], capture_output=True, text=True)
             self.assertEqual(run.returncode, 2)
             self.assertIn('table hash mismatch', json.loads(run.stdout)['reason'])
@@ -36,7 +36,7 @@ class IntegrityTests(unittest.TestCase):
             shutil.copytree(LEDGER / 'ledger', root / 'ledger', ignore=shutil.ignore_patterns('__pycache__'))
             (root / 'data').mkdir()
             shutil.copyfile(LEDGER / 'data/weekly.csv', root / 'data/weekly.csv')
-            run = subprocess.run([sys.executable, '-m', 'ask_filings', 'bitcoin holdings',
+            run = subprocess.run([sys.executable, '-m', 'ask_filings', '--json', 'bitcoin holdings',
                                   '--ledger', str(root)], capture_output=True, text=True)
             self.assertEqual(run.returncode, 2)
             self.assertIn('source cache missing', json.loads(run.stdout)['reason'])
@@ -57,7 +57,7 @@ class IntegrityTests(unittest.TestCase):
             target = root / 'data/raw' / rel
             target.parent.mkdir(parents=True)
             target.write_bytes((LEDGER / 'data/raw' / rel).read_bytes() + b' altered')
-            run = subprocess.run([sys.executable, '-m', 'ask_filings', 'bitcoin holdings',
+            run = subprocess.run([sys.executable, '-m', 'ask_filings', '--json', 'bitcoin holdings',
                                   '--ledger', str(root)], capture_output=True, text=True)
             self.assertEqual(run.returncode, 2)
             self.assertIn('hash', json.loads(run.stdout)['reason'])
@@ -82,7 +82,7 @@ class IntegrityTests(unittest.TestCase):
             manifest = (LEDGER / 'data/raw/manifest.csv').read_text()
             manifest = manifest.replace(hashlib.sha256(original).hexdigest(), hashlib.sha256(changed).hexdigest())
             (root / 'data/raw/manifest.csv').write_text(manifest)
-            run = subprocess.run([sys.executable, '-m', 'ask_filings', 'bitcoin holdings',
+            run = subprocess.run([sys.executable, '-m', 'ask_filings', '--json', 'bitcoin holdings',
                                   '--ledger', str(root)], capture_output=True, text=True)
             self.assertEqual(run.returncode, 2)
             self.assertIn('manifest hash mismatch', json.loads(run.stdout)['reason'])

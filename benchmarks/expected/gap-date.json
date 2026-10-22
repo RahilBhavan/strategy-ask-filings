@@ -1,0 +1,9 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "bitcoin purchased",
+    "knowledge_cutoff": "2026-10-21",
+    "reason": "no matching filed record by cutoff; no filed reporting period contains 2025-08-25; nearest period ends: 2025-08-24 or 2025-09-01",
+    "status": "unavailable"
+  }
+}

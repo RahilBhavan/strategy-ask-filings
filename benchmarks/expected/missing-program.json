@@ -3,7 +3,7 @@
   "result": {
     "field": "issuance",
     "knowledge_cutoff": "2026-10-21",
-    "reason": "no matching filed record by cutoff; dates are exact observation dates",
+    "reason": "no matching filed record by cutoff",
     "status": "unavailable"
   }
 }

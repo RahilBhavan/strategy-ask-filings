@@ -16,21 +16,28 @@ python -m ask_filings 'How much bitcoin did Strategy hold  on 2026-10-18?'
 python -m ask_filings ''
 ```
 
-The last command intentionally exits 2 with JSON `status: refused`. Setup needs
-GitHub once; subsequent runs are offline. On Python 3.14.7 the standalone
+The last command intentionally exits 2 with `Refused: ...` (add `--json` for the JSON result; the benchmark always uses `--json`). Setup needs
+GitHub once; subsequent runs are offline. On Python 3.14.7 the original standalone
 56-case benchmark took **4.367 seconds** locally (one observed run, no latency
-promise). Two fresh benchmark processes emitted byte-identical reports.
-The entire 28-test suite took about 5.3 seconds locally. No package install,
+promise). On October 22, 2026 two fresh processes of the 75-case benchmark
+emitted byte-identical reports, and the 34-test suite took about 7 seconds. No package install,
 credentials, SEC download or model is needed after setup.
 
 ## Contract and failure reports
 
-[The fixed set](../benchmarks/cases.json) has 56 cases and 29 shared expectation
-files. Every intent has a canonical, documented paraphrase and whitespace
+[The fixed set](../benchmarks/cases.json) has 75 cases and 43 shared expectation
+files across 15 categories. Every intent has a canonical, documented paraphrase and whitespace
 variant. Additional cases exercise latest-in-snapshot selection, filing cutoff,
 future observation dates, missing fields/denominators/programs, disclosed zero,
 two ATM programs, sale-cost refusal, invalid input, unsupported questions and
-trailing hostile instructions. Missing/altered source cases run with isolated
+trailing hostile instructions. The 19 cases added October 22, 2026 cover
+`latest ...` phrasing, `week of` and mid-week dates snapped to the containing
+reporting period (flows answer with a note; a mid-period balance refuses and
+names the period end), a date in a filing gap, ranges (`between ... and ...`,
+`from ... to ...`) with flow totals, partial-period exclusion and a missing
+balance, reversed ranges, `latest` plus a date, and mNAV refusals. Nine older
+expectations changed deliberately: issuance/capacity units now say `USD`, and
+date misses name the containing or nearest period. Missing/altered source cases run with isolated
 copies of code/tables/manifest under disk-backed scratch; they never alter the
 configured checkout or the archive. Scratch fault copies are deleted afterward.
 

@@ -47,7 +47,7 @@
         "formula": null,
         "period_start": "2026-10-12",
         "program": "STRC Stock",
-        "unit": "net proceeds in stated currency",
+        "unit": "USD net proceeds",
         "value": "0"
       }
     ],

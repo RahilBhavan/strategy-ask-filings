@@ -3,7 +3,7 @@
   "result": {
     "field": "bitcoin holdings",
     "knowledge_cutoff": "2026-10-21",
-    "reason": "no matching filed record by cutoff; dates are exact observation dates",
+    "reason": "2026-10-17 is inside reporting period 2026-10-12 to 2026-10-18; balances are filed only as of period end. Ask \"bitcoin holdings on 2026-10-18\" or \"bitcoin holdings week of 2026-10-17\".",
     "status": "unavailable"
   }
 }

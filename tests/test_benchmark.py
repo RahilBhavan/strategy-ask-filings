@@ -24,7 +24,8 @@ class BenchmarkTests(unittest.TestCase):
     def test_full_offline_cli_benchmark(self):
         report = run_suite(default_ledger())
         self.assertEqual(report['failures'], [])
-        self.assertEqual(report['passed'], 56)
+        self.assertEqual(report['passed'], 75)
+        self.assertEqual(report['cases'], 75)
         for category in ('canonical', 'paraphrase', 'whitespace'):
             covered = {c['intent'] for c in self.cases if c['category'] == category}
             self.assertEqual(covered, set(FIELDS))
@@ -43,6 +44,11 @@ class BenchmarkTests(unittest.TestCase):
                 continue
             field = FIELDS[expected['field']]
             rows = read(field['table'] + '.csv')
+            if 'total' in expected:
+                from decimal import Decimal
+                self.assertEqual(field['kind'], 'flow')
+                self.assertEqual(Decimal(expected['total']['value']),
+                                 sum(Decimal(f['value']) for f in expected['facts']))
             for fact in expected['facts']:
                 with self.subTest(case=case['id'], program=fact['program']):
                     date_key = 'as_of' if field['table'] == 'share_anchors' else 'period_end'
@@ -61,7 +67,10 @@ class BenchmarkTests(unittest.TestCase):
                     else:
                         value = row[field['field']]
                     self.assertEqual(fact['value'], value)
-                    self.assertEqual(fact['unit'], field['unit'])
+                    unit = field['unit']
+                    if field['table'] == 'instrument_weekly':
+                        unit = row['currency'] + (' net proceeds' if field['field'] == 'amount_usd' else '')
+                    self.assertEqual(fact['unit'], unit)
                     self.assertLessEqual(fact['filed'], case['cutoff'])
                     for cite in fact['evidence']:
                         self.assertEqual(cite['accession'], row['accession'])

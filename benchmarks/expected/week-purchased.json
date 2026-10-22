@@ -1,0 +1,50 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2026-03-15",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001193125-26-107263",
+            "as_of": "2026-03-15",
+            "derivation": "parser extraction; source section includes context",
+            "field": "btc_acquired",
+            "filed": "2026-03-16",
+            "line_numbers": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              59
+            ],
+            "lines_sha256": "5cc742644583760e6605bffc1b16fffebc431c213ec8b7f1adbfc98a6e7a7d65",
+            "local_bytes_sha256": "81ee657efd237ff28712f9d98eb023313ac13f3e4c70ca4354ce2e2af7e8e14e",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-03-09",
+            "sha256": "81ee657efd237ff28712f9d98eb023313ac13f3e4c70ca4354ce2e2af7e8e14e",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526107263/mstr-20260223.htm",
+            "value": "22337"
+          }
+        ],
+        "filed": "2026-03-16",
+        "formula": null,
+        "period_start": "2026-03-09",
+        "program": null,
+        "unit": "BTC",
+        "value": "22337"
+      }
+    ],
+    "field": "bitcoin purchased",
+    "knowledge_cutoff": "2026-10-21",
+    "note": "week of 2026-03-09: reporting period 2026-03-09 to 2026-03-15; the filing reports the period total.",
+    "status": "answered",
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

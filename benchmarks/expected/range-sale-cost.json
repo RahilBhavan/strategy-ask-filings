@@ -1,0 +1,8 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "bitcoin purchase cost",
+    "reason": "matching source field represents sale proceeds; no purchase-cost substitution (period ending 2026-08-09)",
+    "status": "unavailable"
+  }
+}

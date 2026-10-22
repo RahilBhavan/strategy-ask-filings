@@ -1,0 +1,9 @@
+{
+  "exit_code": 2,
+  "result": {
+    "field": "basic shares",
+    "knowledge_cutoff": "2026-10-21",
+    "reason": "no matching filed record by cutoff; basic shares are filed as of quarterly/annual cover dates, nearest: 2026-07-24",
+    "status": "unavailable"
+  }
+}

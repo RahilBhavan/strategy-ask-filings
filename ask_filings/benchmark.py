@@ -80,7 +80,7 @@ def evidence_root(root, scenario):
 
 def evaluate(case, root, expected):
     with evidence_root(root, case.get('scenario', 'intact')) as selected:
-        run = subprocess.run([sys.executable, '-m', 'ask_filings', case['question'],
+        run = subprocess.run([sys.executable, '-m', 'ask_filings', '--json', case['question'],
                               '--ledger', str(selected), '--as-of', case['cutoff']],
                              cwd=PROJECT, capture_output=True, text=True, timeout=30)
         actual = {'exit_code': run.returncode,

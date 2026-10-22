@@ -452,6 +452,158 @@
       "cutoff": "2026-10-21",
       "expected": "altered-source",
       "scenario": "altered_source"
+    },
+    {
+      "id": "latest-phrase",
+      "question": "latest bitcoin holdings",
+      "category": "phrasing",
+      "intent": "bitcoin holdings",
+      "cutoff": "2026-10-21",
+      "expected": "latest"
+    },
+    {
+      "id": "latest-phrase-the",
+      "question": "What were the latest bitcoin holdings?",
+      "category": "phrasing",
+      "intent": "bitcoin holdings",
+      "cutoff": "2026-10-21",
+      "expected": "latest"
+    },
+    {
+      "id": "week-purchased",
+      "question": "bitcoin purchased week of 2026-03-09",
+      "category": "period-snap",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "week-purchased"
+    },
+    {
+      "id": "week-purchased-paraphrase",
+      "question": "How much bitcoin did Strategy buy in the week of 2026-03-09?",
+      "category": "period-snap",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "week-purchased"
+    },
+    {
+      "id": "midweek-purchased",
+      "question": "bitcoin purchased on 2026-03-12",
+      "category": "period-snap",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "midweek-purchased"
+    },
+    {
+      "id": "midweek-issuance",
+      "question": "issuance MSTR on 2026-10-14",
+      "category": "period-snap",
+      "intent": "issuance",
+      "cutoff": "2026-10-21",
+      "expected": "midweek-issuance"
+    },
+    {
+      "id": "week-holdings",
+      "question": "bitcoin holdings week of 2026-10-17",
+      "category": "period-snap",
+      "intent": "bitcoin holdings",
+      "cutoff": "2026-10-21",
+      "expected": "week-holdings"
+    },
+    {
+      "id": "gap-date",
+      "question": "bitcoin purchased on 2025-08-25",
+      "category": "period-snap",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "gap-date"
+    },
+    {
+      "id": "shares-between-covers",
+      "question": "basic shares on 2026-07-30",
+      "category": "period-snap",
+      "intent": "basic shares",
+      "cutoff": "2026-10-21",
+      "expected": "shares-between-covers"
+    },
+    {
+      "id": "range-purchased",
+      "question": "bitcoin purchased between 2026-03-02 and 2026-03-22",
+      "category": "range",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "range-purchased"
+    },
+    {
+      "id": "range-purchased-from-to",
+      "question": "How much bitcoin did Strategy buy from 2026-03-02 to 2026-03-22?",
+      "category": "range",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "range-purchased"
+    },
+    {
+      "id": "range-partial",
+      "question": "bitcoin purchased between 2026-03-04 and 2026-03-22",
+      "category": "range",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "range-partial"
+    },
+    {
+      "id": "range-issuance",
+      "question": "issuance MSTR between 2026-10-05 and 2026-10-18",
+      "category": "range",
+      "intent": "issuance",
+      "cutoff": "2026-10-21",
+      "expected": "range-issuance"
+    },
+    {
+      "id": "range-reserve",
+      "question": "usd reserve from 2026-09-28 to 2026-10-18",
+      "category": "range",
+      "intent": "usd reserve",
+      "cutoff": "2026-10-21",
+      "expected": "range-reserve"
+    },
+    {
+      "id": "range-sale-cost",
+      "question": "bitcoin purchase cost between 2026-08-03 and 2026-08-16",
+      "category": "range",
+      "intent": "bitcoin purchase cost",
+      "cutoff": "2026-10-21",
+      "expected": "range-sale-cost"
+    },
+    {
+      "id": "range-reversed",
+      "question": "bitcoin purchased between 2026-03-22 and 2026-03-02",
+      "category": "invalid-input",
+      "intent": "bitcoin purchased",
+      "cutoff": "2026-10-21",
+      "expected": "range-reversed"
+    },
+    {
+      "id": "latest-and-date",
+      "question": "latest bitcoin holdings on 2026-10-18",
+      "category": "invalid-input",
+      "intent": "bitcoin holdings",
+      "cutoff": "2026-10-21",
+      "expected": "latest-and-date"
+    },
+    {
+      "id": "mnav",
+      "question": "what is the mNAV",
+      "category": "unsupported",
+      "intent": "unsupported",
+      "cutoff": "2026-10-21",
+      "expected": "mnav"
+    },
+    {
+      "id": "mnav-dated",
+      "question": "mNAV on 2026-10-18",
+      "category": "unsupported",
+      "intent": "unsupported",
+      "cutoff": "2026-10-21",
+      "expected": "mnav"
     }
   ]
 }

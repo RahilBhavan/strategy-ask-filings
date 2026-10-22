@@ -44,7 +44,7 @@
         "formula": null,
         "period_start": "2025-04-28",
         "program": "2025 Common ATM",
-        "unit": "stated currency",
+        "unit": "USD",
         "value": "21000000000"
       },
       {
@@ -88,7 +88,7 @@
         "formula": null,
         "period_start": "2025-04-28",
         "program": "2024 Common ATM",
-        "unit": "stated currency",
+        "unit": "USD",
         "value": "0"
       }
     ],

@@ -1,0 +1,112 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2026-10-11",
+        "currency": "USD",
+        "evidence": [
+          {
+            "accession": "0001193125-26-419726",
+            "as_of": "2026-10-11",
+            "derivation": "parser extraction; source section includes context",
+            "field": "amount_usd",
+            "filed": "2026-10-13",
+            "line_numbers": [
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              37
+            ],
+            "lines_sha256": "6e98f4ec998c767307ff5bd0d779fe33e682618c73794e4d9d36d863e51498cd",
+            "local_bytes_sha256": "b3c3501059abe6f6fe470f0f055962849057da67034a3702b948d442aed8bda9",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-10-05",
+            "sha256": "b3c3501059abe6f6fe470f0f055962849057da67034a3702b948d442aed8bda9",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526419726/mstr-ex99_1.htm",
+            "value": "21000000"
+          }
+        ],
+        "filed": "2026-10-13",
+        "formula": null,
+        "period_start": "2026-10-05",
+        "program": "MSTR Stock",
+        "unit": "USD net proceeds",
+        "value": "21000000"
+      },
+      {
+        "as_of": "2026-10-18",
+        "currency": "USD",
+        "evidence": [
+          {
+            "accession": "0001193125-26-424688",
+            "as_of": "2026-10-18",
+            "derivation": "parser extraction; source section includes context",
+            "field": "amount_usd",
+            "filed": "2026-10-19",
+            "line_numbers": [
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              62
+            ],
+            "lines_sha256": "3d4ce09a294ce01a207a480a9b1ca170f3b7ca383221f8c10e3c3c110f484e45",
+            "local_bytes_sha256": "758fffb5bae03a2b52568ef75168f7fe710e41b46f1092e96fd72425865c99f3",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-10-12",
+            "sha256": "758fffb5bae03a2b52568ef75168f7fe710e41b46f1092e96fd72425865c99f3",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526424688/mstr-20261019.htm",
+            "value": "22000000"
+          }
+        ],
+        "filed": "2026-10-19",
+        "formula": null,
+        "period_start": "2026-10-12",
+        "program": "MSTR Stock",
+        "unit": "USD net proceeds",
+        "value": "22000000"
+      }
+    ],
+    "field": "issuance",
+    "knowledge_cutoff": "2026-10-21",
+    "note": "2 filed observations inside 2026-10-05 to 2026-10-18. Weeks without a weekly filing are absent, not zero.",
+    "status": "answered",
+    "total": {
+      "formula": "sum of the 2 filed values listed in facts",
+      "unit": "USD net proceeds",
+      "value": "43000000"
+    },
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}

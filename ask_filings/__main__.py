@@ -3,6 +3,7 @@ import argparse
 import json
 from .engine import answer
 from .fields import FIELDS
+from .render import text
 from .dependency import default_ledger
 
 
@@ -12,6 +13,7 @@ def main():
     p.add_argument('--ledger', default=str(default_ledger()))
     p.add_argument('--as-of', default='2026-10-21', help='filing-date knowledge cutoff; default frozen review date')
     p.add_argument('--fields', action='store_true')
+    p.add_argument('--json', action='store_true', help='print the full JSON result')
     a = p.parse_args()
     if a.fields:
         print(json.dumps(FIELDS, indent=2, sort_keys=True))
@@ -22,7 +24,7 @@ def main():
         result = answer(a.question, a.ledger, a.as_of)
     except (ValueError, OSError, KeyError) as e:
         result = {'status': 'refused', 'reason': str(e)}
-    print(json.dumps(result, indent=2, sort_keys=True))
+    print(json.dumps(result, indent=2, sort_keys=True) if a.json else text(result))
     return 0 if result['status'] == 'answered' else 2
 
 

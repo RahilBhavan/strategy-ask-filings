@@ -2,7 +2,7 @@
 
 Purpose: describe the deterministic grammar and its refusal boundary.
 
-`ask_filings/fields.py` is the semantic field layer: name, source column, units, table and accepted intent expression. `--fields` exports it as JSON. Each template accepts an optional `on YYYY-MM-DD`, `for YYYY-MM-DD` or `at YYYY-MM-DD` suffix and an optional question mark. Whitespace runs (spaces, tabs and line breaks) normalize to one space before matching; the 500-character limit applies to the original input. Matching is case-insensitive and anchored to the entire question. Multiple questions or arbitrary trailing instructions refuse.
+`ask_filings/fields.py` is the semantic field layer: name, source column, units, table and accepted intent expression. `--fields` exports it as JSON. Each template accepts an optional `latest` prefix (also `what were the latest ...`) or one date clause: `on|for|at|as of YYYY-MM-DD`, `week of YYYY-MM-DD` (optionally `in the week of`), or a range `between A and B` / `from A to B`; then an optional question mark. Whitespace runs (spaces, tabs and line breaks) normalize to one space before matching; the 500-character limit applies to the original input. Matching is case-insensitive and anchored to the entire question. Multiple questions or arbitrary trailing instructions refuse.
 
 Examples of accepted base templates:
 
@@ -16,7 +16,7 @@ Examples of accepted base templates:
 - `remaining capacity STRC` / `how much capacity remained for STRC`
 - `sats per basic share` / `what were sats per basic share`
 
-Issuance/capacity accept MSTR, STRC, STRD, STRF, STRK or STRE. A recognized ticker with no matching data is unavailable, not zero. Separate ATM programs stay separate. Dates specify exact observation dates, not a nearest-date lookup. Without a date, choose the latest observation **in the frozen corpus** filed by `--as-of` (default October 21, 2026). The latest cover-page basic-share observation differs from the latest weekly holdings date. A known observation after the filing cutoff remains unavailable even if its economic date is earlier.
+Issuance/capacity accept MSTR, STRC, STRD, STRF, STRK or STRE. A recognized ticker with no matching data is unavailable, not zero. Separate ATM programs stay separate. A date that is a filed observation date selects it exactly. A date inside a weekly reporting period selects that period for flow fields (purchases, purchase cost, issuance) and the answer says so; balance fields (holdings, reserve, cash, capacity, sats/share) are filed only as of period end, so a mid-period balance is unavailable and the reason names the period end to ask about. `week of D` selects the period containing D for any weekly field. A date in no filed period, or a share date between cover dates, is unavailable with the nearest filed dates. Ranges include only periods fully inside the range; partly overlapping periods are named and excluded, weeks without a filing are absent rather than zero, and flow fields get a `total` that sums the listed values. There is no nearest-date substitution. Without a date, choose the latest observation **in the frozen corpus** filed by `--as-of` (default October 21, 2026). The latest cover-page basic-share observation differs from the latest weekly holdings date. A known observation after the filing cutoff remains unavailable even if its economic date is earlier.
 
 Answers include the semantic field, units, period/as-of date, filing date, accession, SEC URL, original-byte SHA-256 and numbered normalized paragraph/table-row lines. The ledger's evidence module supplies source sections, keeping header units and dates beside values. These are not original HTML line numbers or claims of individual-cell attribution. Repeat the command to replay the same source lines; use `ledger.evidence.source_lines(url)` to inspect the full numbering.
 
@@ -24,6 +24,8 @@ The only ratios supported are sats/basic share with both BTC holdings and a same
 
 Purchase-cost questions in sale weeks refuse: the inherited USD field then represents sale proceeds. Queries verify table and source-manifest hashes against the frozen contract. Citations verify source bytes against the ledger manifest before returning evidence. A missing source cache refuses; asking never triggers network hydration.
 
-Unsupported questions return `refused`; supported questions with missing data return `unavailable`; competing filings for the same observation/program return `ambiguous`. All exit 2. Answers exit 0. This is a structured-fact query interface, not unrestricted semantic retrieval, an LLM, AI or financial advice. It does not answer accounting-policy, revenue, legal, forecast or dividend-enactment questions.
+Unsupported questions return `refused`; supported questions with missing data return `unavailable`; competing filings for the same observation/program return `ambiguous`. All exit 2. Answers exit 0. This is a structured-fact query interface, not unrestricted semantic retrieval, an LLM, AI or financial advice. It does not answer accounting-policy, revenue, legal, forecast or dividend-enactment questions. mNAV refuses with its reason: it needs market prices, which these filings do not state.
 
-Explicit empty questions return structured JSON refusal; omitting the question entirely remains an argparse usage error. Invalid question/cutoff dates use the stable reason `date must be ISO YYYY-MM-DD`.
+The CLI prints one `Answer:` line first, then any note, formula and evidence; `--json` prints the full result, which the benchmark and tests use.
+
+Explicit empty questions return a structured refusal; omitting the question entirely remains an argparse usage error. Invalid question/cutoff dates use the stable reason `date must be ISO YYYY-MM-DD`.

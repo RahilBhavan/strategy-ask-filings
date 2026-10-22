@@ -74,13 +74,13 @@ class AskTests(unittest.TestCase):
         self.assertEqual(D(fact['value']), D(450000) * 100000000 / D(246489000))
 
     def test_cli_reproducible_with_saved_evidence(self):
-        cmd = [sys.executable, '-m', 'ask_filings', 'bitcoin holdings on 2026-10-18']
+        cmd = [sys.executable, '-m', 'ask_filings', '--json', 'bitcoin holdings on 2026-10-18']
         output = subprocess.check_output(cmd, cwd=ROOT)
         self.assertEqual(output, subprocess.check_output(cmd, cwd=ROOT))
         self.assertEqual(output, (ROOT / 'examples/holdings.json').read_bytes())
 
     def test_cli_refusal_nonzero(self):
-        run = subprocess.run([sys.executable, '-m', 'ask_filings', 'are daily dividends enacted'], cwd=ROOT, capture_output=True)
+        run = subprocess.run([sys.executable, '-m', 'ask_filings', '--json', 'are daily dividends enacted'], cwd=ROOT, capture_output=True)
         self.assertEqual(run.returncode, 2)
         self.assertEqual(json.loads(run.stdout)['status'], 'refused')
 
@@ -121,3 +121,48 @@ class AskTests(unittest.TestCase):
 
     def test_disclosed_zero_is_not_missing(self):
         self.assertEqual(self.ask('issuance STRC on 2026-10-18')['facts'][0]['value'], '0')
+
+    def test_phrasings_snap_dates_to_the_containing_period(self):
+        self.assertEqual(self.ask('latest bitcoin holdings')['facts'][0]['as_of'], '2026-10-18')
+        self.assertEqual(self.ask('What were the latest bitcoin holdings?')['facts'][0]['value'], '848517')
+        for q in ('bitcoin purchased week of 2026-03-09', 'bitcoin purchased on 2026-03-12',
+                  'how much bitcoin did strategy buy in the week of 2026-03-15'):
+            with self.subTest(q=q):
+                result = self.ask(q)
+                self.assertEqual(result['facts'][0]['value'], '22337')
+                self.assertIn('2026-03-09 to 2026-03-15', result['note'])
+        # A mid-period balance is not filed; name the period end instead of substituting it.
+        result = self.ask('bitcoin holdings on 2026-10-15')
+        self.assertEqual(result['status'], 'unavailable')
+        self.assertIn('bitcoin holdings on 2026-10-18', result['reason'])
+        self.assertIn('2025-08-24 or 2025-09-01', self.ask('bitcoin purchased on 2025-08-25')['reason'])
+
+    def test_ranges_list_periods_and_total_only_flows(self):
+        result = self.ask('bitcoin purchased between 2026-03-02 and 2026-03-22')
+        self.assertEqual([f['value'] for f in result['facts']], ['17994', '22337', '1031'])
+        self.assertEqual(result['total']['value'], '41362')
+        result = self.ask('usd reserve from 2026-09-28 to 2026-10-18')
+        self.assertNotIn('total', result)
+        self.assertIn('2026-09-30', result['note'])
+        with self.assertRaisesRegex(ValueError, 'start must be on or before'):
+            intent('bitcoin purchased between 2026-03-22 and 2026-03-02')
+
+    def test_mnav_refusal_explains_why(self):
+        with self.assertRaisesRegex(ValueError, 'mNAV is unsupported: .*Market prices are not stated'):
+            intent('what is the mNAV on 2026-10-18')
+
+    def test_usd_named_in_instrument_units(self):
+        self.assertEqual(self.ask('issuance MSTR on 2026-10-18')['facts'][0]['unit'], 'USD net proceeds')
+        self.assertEqual(self.ask('remaining capacity STRC on 2026-10-18')['facts'][0]['unit'], 'USD')
+
+    def test_default_cli_prints_answer_line_first(self):
+        out = subprocess.check_output([sys.executable, '-m', 'ask_filings', 'bitcoin holdings on 2026-10-18'],
+                                      cwd=ROOT, text=True)
+        self.assertEqual(out.splitlines()[0], 'Answer: bitcoin holdings: 848,517 BTC, as of 2026-10-18 '
+                                              '(period 2026-10-12 to 2026-10-18), filed 2026-10-19')
+        self.assertIn('55: 267 | 22.1 | 82,900 | 848,517', out)
+        run = subprocess.run([sys.executable, '-m', 'ask_filings', 'what is the mNAV'], cwd=ROOT,
+                             capture_output=True, text=True)
+        self.assertEqual(run.returncode, 2)
+        self.assertTrue(run.stdout.startswith('Refused: mNAV is unsupported'))
+

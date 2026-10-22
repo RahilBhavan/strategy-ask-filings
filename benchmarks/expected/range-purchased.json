@@ -1,0 +1,128 @@
+{
+  "exit_code": 0,
+  "result": {
+    "engine": "deterministic exact supported intents; no LLM",
+    "facts": [
+      {
+        "as_of": "2026-03-08",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001193125-26-097598",
+            "as_of": "2026-03-08",
+            "derivation": "parser extraction; source section includes context",
+            "field": "btc_acquired",
+            "filed": "2026-03-09",
+            "line_numbers": [
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              57
+            ],
+            "lines_sha256": "33f514fe55c125c8632156187bfd1c1bb29a4261f2717c285d2f8d05419388a6",
+            "local_bytes_sha256": "0ba1e7592396117f424bc1daef7412fa5ea0be34e3c5aa5657f3c0f7bedb5fd1",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-03-02",
+            "sha256": "0ba1e7592396117f424bc1daef7412fa5ea0be34e3c5aa5657f3c0f7bedb5fd1",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526097598/d122015d8k.htm",
+            "value": "17994"
+          }
+        ],
+        "filed": "2026-03-09",
+        "formula": null,
+        "period_start": "2026-03-02",
+        "program": null,
+        "unit": "BTC",
+        "value": "17994"
+      },
+      {
+        "as_of": "2026-03-15",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001193125-26-107263",
+            "as_of": "2026-03-15",
+            "derivation": "parser extraction; source section includes context",
+            "field": "btc_acquired",
+            "filed": "2026-03-16",
+            "line_numbers": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              59
+            ],
+            "lines_sha256": "5cc742644583760e6605bffc1b16fffebc431c213ec8b7f1adbfc98a6e7a7d65",
+            "local_bytes_sha256": "81ee657efd237ff28712f9d98eb023313ac13f3e4c70ca4354ce2e2af7e8e14e",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-03-09",
+            "sha256": "81ee657efd237ff28712f9d98eb023313ac13f3e4c70ca4354ce2e2af7e8e14e",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526107263/mstr-20260223.htm",
+            "value": "22337"
+          }
+        ],
+        "filed": "2026-03-16",
+        "formula": null,
+        "period_start": "2026-03-09",
+        "program": null,
+        "unit": "BTC",
+        "value": "22337"
+      },
+      {
+        "as_of": "2026-03-22",
+        "currency": null,
+        "evidence": [
+          {
+            "accession": "0001193125-26-118584",
+            "as_of": "2026-03-22",
+            "derivation": "parser extraction; source section includes context",
+            "field": "btc_acquired",
+            "filed": "2026-03-23",
+            "line_numbers": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              59
+            ],
+            "lines_sha256": "03d4e3403370cba045c54fb2fb506dc336a6148bcaf6d8a593c4254079ab8d38",
+            "local_bytes_sha256": "1a5d534193f641d4d0de5e5d1b28017ec2cfe613f81e6ae4ff1ed42d5ff16edb",
+            "locator_basis": "1-based normalized paragraph/table-row lines, including headers and units",
+            "period_start": "2026-03-16",
+            "sha256": "1a5d534193f641d4d0de5e5d1b28017ec2cfe613f81e6ae4ff1ed42d5ff16edb",
+            "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526118584/mstr-20260223.htm",
+            "value": "1031"
+          }
+        ],
+        "filed": "2026-03-23",
+        "formula": null,
+        "period_start": "2026-03-16",
+        "program": null,
+        "unit": "BTC",
+        "value": "1031"
+      }
+    ],
+    "field": "bitcoin purchased",
+    "knowledge_cutoff": "2026-10-21",
+    "note": "3 filed observations inside 2026-03-02 to 2026-03-22. Weeks without a weekly filing are absent, not zero.",
+    "status": "answered",
+    "total": {
+      "formula": "sum of the 3 filed values listed in facts",
+      "unit": "BTC",
+      "value": "41362"
+    },
+    "uncertainty": "As filed, rounded figures; source lines are normalized source sections, not original HTML lines. Latest means latest in the frozen corpus by cutoff, not a live completeness claim."
+  }
+}
