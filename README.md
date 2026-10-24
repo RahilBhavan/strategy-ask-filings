@@ -66,7 +66,7 @@ Example phrasings (all in the benchmark):
 
 Templates: `python -m ask_filings --fields`. Dates may follow `on`, `for`, `at`, `as of` or `week of`; ranges use `between A and B` or `from A to B`. Ranges include only whole periods inside the range and total only flow fields (purchases, cost, issuance).
 
-Observed: **34 tests pass**, including a [75-case checked benchmark](docs/benchmark.md), on Python 3.14.7. In that benchmark, all 47 answered cases cite an accession, URL and source lines; the other 28 cases are refusals or unavailable results. The suite also checks cutoffs, absent denominators, multiple programs, table and source tampering, a missing cache and repeatable CLI output. See [verification](docs/verification.md).
+Observed: **34 tests pass**, including a [75-case checked benchmark](docs/benchmark.md), on Python 3.14.7. In that benchmark, all 45 answered cases cite an accession, URL and source lines; the other 30 cases are 18 refusals and 12 unavailable results, none with a citation. Replay it with `python -m ask_filings.benchmark`. The suite also checks cutoffs, absent denominators, multiple programs, table and source tampering, a missing cache and repeatable CLI output. See [verification](docs/verification.md).
 For a custom checkout, use `--ledger` or `ASK_FILINGS_LEDGER`; see the
 [dependency contract](docs/dependency.md).
 
@@ -92,6 +92,8 @@ python scripts/render_demo_gif.py
 - `ask_filings/`: field catalog, deterministic routing, evidence answers and CLI.
 - `examples/`: saved outputs from actual SEC sources.
 - `tests/`: answers, refusals, time boundaries and CLI checks.
+- `benchmarks/`: the 75 benchmark cases and their expected results.
+- `design/`: design tokens and review record.
 - `docs/`: scope, grammar, sources and verification.
 - `fixtures/`: frozen SEC source archive, original manifest and dependency lock.
 - `scripts/`: verified setup of the pinned public ledger, and `render_demo_gif.py`, which regenerates `docs/demo.gif` from real CLI runs.
