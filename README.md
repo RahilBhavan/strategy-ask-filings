@@ -1,20 +1,24 @@
-# Strategy ask filings: answer supported filing questions with exact evidence
+# Strategy ask filings: no LLM, every answer cites the filing
+
+Ask a plain question about how much bitcoin Strategy (MSTR) holds or bought, or how many shares it has, and get the number from its SEC filing with the exact lines it came from.
 
 [![Offline verification](https://github.com/RahilBhavan/strategy-ask-filings/actions/workflows/ci.yml/badge.svg)](https://github.com/RahilBhavan/strategy-ask-filings/actions/workflows/ci.yml)
 
-A local CLI maps nine explicit question intents, asked in plain phrasings, to Strategy filing fields. Each answer includes its value, units, dates, accession, source URL, original-byte hash and numbered normalized source sections. This is a deterministic grammar over structured facts; it calls no LLM or embedding model.
+![Terminal recording: the question "bitcoin holdings on 2026-10-18" returns 848,517 BTC with the October 19, 2026 8-K's URL, accession number, hash and source lines; "what is the mNAV" is refused because the filings state no market prices.](docs/demo.gif)
+
+A local CLI maps nine question types, asked in plain phrasings, to fields in Strategy's SEC filings. No language model is involved. A fixed grammar picks the field, and the engine reads it from a frozen, hashed copy of the filings. Every answer prints its value, units, dates, accession number, source URL, source-file hash and the numbered source lines. A question it cannot answer from a filing is refused with a reason, and a refusal carries no citation.
 
 ## What it does
 
 - Answers holdings, purchases, purchase cost, USD Reserve/Cash, basic shares, issuance, remaining capacity and sourced sats/basic share.
 - Reads 97 weekly observations, 432 program/action rows and 8 quarterly/annual cover-page anchors from the frozen ledger snapshot, through the October 19, 2026 weekly filing.
 - Keeps separate ATM agreements separate and applies a filing-date knowledge cutoff.
-- Refuses unsupported questions, invalid dates, ambiguous records and missing data. Current sats/share is unavailable without a same-date filed denominator.
+- Refuses unsupported questions, invalid dates, ambiguous records and missing data. Sats per basic share needs a share count filed for the same date, so the current value is unavailable.
 - Saved real-source examples: [848,517 BTC as of October 18](examples/holdings.json) and [384,225,751 basic shares as of July 24](examples/shares.json), with exact evidence and different filing dates.
 
 ## How it works
 
-`ask_filings/fields.py` defines semantic fields, units and full-match intent templates. `engine.py` filters exact dates and filing cutoffs, then delegates citation construction to the ledger's source evidence module. Derived ratios require both sourced inputs. There is no unrestricted document retrieval or generated answer prose.
+`ask_filings/fields.py` defines the fields, units and full-match question templates. `engine.py` filters exact dates and filing cutoffs, then builds citations with the ledger's source evidence module. A derived ratio cites both of its inputs. There is no free-text retrieval and no generated answer prose. The only network code is the pinned ledger's SEC downloader, which answering never calls; the tests block network connections.
 
 ## Run it
 
@@ -62,9 +66,7 @@ Example phrasings (all in the benchmark):
 
 Templates: `python -m ask_filings --fields`. Dates may follow `on`, `for`, `at`, `as of` or `week of`; ranges use `between A and B` or `from A to B`. Ranges include only whole periods inside the range and total only flow fields (purchases, cost, issuance).
 
-Observed: **34 tests pass**, including a [75-case checked benchmark](docs/benchmark.md), on Python 3.14.7. The suite checks real source values/lines, cutoffs, absent denominators, multiple
-programs, table/source tampering, missing cache and repeatable CLI output.
-See [verification](docs/verification.md) for the executed count and environment.
+Observed: **34 tests pass**, including a [75-case checked benchmark](docs/benchmark.md), on Python 3.14.7. In that benchmark, all 47 answered cases cite an accession, URL and source lines; the other 28 cases are refusals or unavailable results. The suite also checks cutoffs, absent denominators, multiple programs, table and source tampering, a missing cache and repeatable CLI output. See [verification](docs/verification.md).
 For a custom checkout, use `--ledger` or `ASK_FILINGS_LEDGER`; see the
 [dependency contract](docs/dependency.md).
 
@@ -79,6 +81,12 @@ python -m ask_filings 'what is the mNAV'
 
 mNAV refuses because it needs market prices (MSTR share price and bitcoin price) that the filings do not state.
 
+To regenerate the terminal recording at the top from fresh CLI runs (needs Pillow and a monospace TTF font; pass `--font` if none is found):
+
+```bash
+python scripts/render_demo_gif.py
+```
+
 ## Repository layout
 
 - `ask_filings/`: field catalog, deterministic routing, evidence answers and CLI.
@@ -86,12 +94,11 @@ mNAV refuses because it needs market prices (MSTR share price and bitcoin price)
 - `tests/`: answers, refusals, time boundaries and CLI checks.
 - `docs/`: scope, grammar, sources and verification.
 - `fixtures/`: frozen SEC source archive, original manifest and dependency lock.
-- `scripts/`: verified setup of the pinned public ledger.
+- `scripts/`: verified setup of the pinned public ledger, and `render_demo_gif.py`, which regenerates `docs/demo.gif` from real CLI runs.
 
 ## Documentation
 
 - [Public design system](DESIGN.md): Rahil Design 3.3.0, shared tokens and visual review rules.
-
 - [Spec](docs/spec.md): accepted v1 and criteria.
 - [Benchmark](docs/benchmark.md): fixed expectations, category failures and five-minute replay.
 - [Method](docs/method.md): exact templates and evidence contract.
@@ -105,10 +112,10 @@ SEC EDGAR CIK 1050446, via the commit-pinned ledger. Primary [October 19 8-K](ht
 
 ## Scope and limits
 
-- Independent local work, not affiliated with Strategy. No AI/LLM claim or account access.
+- Independent local work, not affiliated with Strategy. No account access.
 - Nine supported intents, not general filing QA. Quarterly/annual mapping covers share counts only.
 - Line numbers refer to deterministic normalized paragraphs/table rows, not original HTML lines. Evidence selects source sections, not individual-cell locators.
-- Latest means latest in the frozen corpus filed by cutoff, not a live completeness promise. Printed values inherit filing rounding.
+- "Latest" means latest in the frozen corpus filed by the cutoff date, not a live feed. Printed values keep the filing's rounding.
 - Unsupported dividend-enactment queries refuse. The October 28 proposal remains pending as of October 21.
 
 ## License
