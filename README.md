@@ -97,6 +97,8 @@ python scripts/render_demo_gif.py
 - `docs/`: scope, grammar, sources and verification.
 - `fixtures/`: frozen SEC source archive, original manifest and dependency lock.
 - `scripts/`: verified setup of the pinned public ledger, and `render_demo_gif.py`, which regenerates `docs/demo.gif` from real CLI runs.
+- `.ask-filings/`: git-ignored working area created by `scripts/setup_ledger.py`. It holds the pinned ledger checkout. Set `ASK_FILINGS_HOME` to move it.
+- `AGENTS.md`, `CLAUDE.md`, `DESIGN.md`, `.githooks/`: instructions and a pre-commit size check for the coding agents that work in this repository. The code does not use them.
 
 ## Documentation
 
