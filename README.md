@@ -81,11 +81,16 @@ python -m ask_filings 'what is the mNAV'
 
 mNAV refuses because it needs market prices (MSTR share price and bitcoin price) that the filings do not state.
 
-To regenerate the terminal recording at the top from fresh CLI runs (needs Pillow and a monospace TTF font; pass `--font` if none is found):
+To regenerate the terminal recording at the top from fresh CLI runs, install the pinned helper dependency (Pillow, listed in `requirements-dev.txt`) into a virtual environment, then run the script. It also needs the pinned ledger from `scripts/setup_ledger.py` and a monospace TTF font; pass `--font` if none is found:
 
 ```bash
-python scripts/render_demo_gif.py
+python -m venv .venv
+.venv/bin/pip install -r requirements-dev.txt
+.venv/bin/python scripts/setup_ledger.py
+.venv/bin/python scripts/render_demo_gif.py
 ```
+
+The package, its tests and `scripts/setup_ledger.py` use only the standard library, so `requirements-dev.txt` is not needed for them.
 
 ## Repository layout
 
@@ -97,6 +102,7 @@ python scripts/render_demo_gif.py
 - `docs/`: scope, grammar, sources and verification.
 - `fixtures/`: frozen SEC source archive, original manifest and dependency lock.
 - `scripts/`: verified setup of the pinned public ledger, and `render_demo_gif.py`, which regenerates `docs/demo.gif` from real CLI runs.
+- `requirements-dev.txt`: pinned dependencies for the helper scripts (Pillow).
 - `.ask-filings/`: git-ignored working area created by `scripts/setup_ledger.py`. It holds the pinned ledger checkout. Set `ASK_FILINGS_HOME` to move it.
 - `AGENTS.md`, `CLAUDE.md`, `DESIGN.md`, `.githooks/`: instructions and a pre-commit size check for the coding agents that work in this repository. The code does not use them.
 
